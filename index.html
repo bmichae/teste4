@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biblioteca Pública Amadeu Amaral</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 36px;
+            color: green;
+        }
+        h2 {
+            font-size: 24px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Biblioteca Pública Amadeu Amaral</h1>
+    <h2>Lista de Livros</h2>
+    <input type="text" id="searchInput" placeholder="Pesquisar por título..."> 
+    <button onclick="searchTitle()">Pesquisar</button><br><br>
+    <button onclick="toggleColumn(0)">Mostrar/Ocultar Editora</button> 
+    <button onclick="toggleColumn(1)">Mostrar/Ocultar Título</button> 
+    <button onclick="toggleColumn(2)">Mostrar/Ocultar Autor</button> 
+    <table id="bookTable">
+        <tr>
+            <th>Editora</th>
+            <th>Título</th>
+            <th>Autor</th>
+        </tr>
+        <tr>
+            <td>Anita Garibaldi</td>
+            <td>Dialética Radical do Brasil Negro</td>
+            <td>Moura, Clóvis</td>
+        </tr>
+        <tr>
+            <td>Autêntica</td>
+            <td>Clara dos Anjos</td>
+            <td>Barreto, Lima</td>
+        </tr>
+    </table><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><p>Endereço: R. José Clóvis de Castro, s/n - Vila da Saúde, São Paulo - SP, 04290-100<br>Horas: Aberto ⋅ Fecha às 18:00<br>Telefone: (11) 5061-3320</p>
+
+    <script type="text/javascript">
+      function toggleColumn(columnIndex) {
+          var table = document.getElementById("bookTable");
+          var rows = table.getElementsByTagName("tr");
+          for (var i = 0; i < rows.length; i++) {
+              var cells = rows[i].getElementsByTagName("th");
+              if (cells.length === 0) {
+                  cells = rows[i].getElementsByTagName("td");
+              }
+              if (cells[columnIndex].style.display === "none") {
+                  cells[columnIndex].style.display = "table-cell";
+              } else {
+                  cells[columnIndex].style.display = "none";
+              }
+          }
+      }
+
+      function searchTitle() {
+          var input = document.getElementById("searchInput");
+          var filter = input.value.toUpperCase();
+          var table = document.getElementById("bookTable");
+          var rows = table.getElementsByTagName("tr");
+
+          for (var i = 1; i < rows.length; i++) {
+              var titleCell = rows[i].getElementsByTagName("td")[1];
+              if (titleCell) {
+                  var titleText = titleCell.textContent || titleCell.innerText;
+                  if (titleText.toUpperCase().indexOf(filter) > -1) {
+                      rows[i].style.display = "";
+                  } else {
+                      rows[i].style.display = "none";
+                  }
+              }       
+          }
+      }
+    </script>
+
+</body>
+</html>
